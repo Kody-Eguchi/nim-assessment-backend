@@ -27,4 +27,15 @@ const create = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getOne, create };
+// eslint-disable-next-line consistent-return
+const update = async (req, res) => {
+  try {
+    const updatedMenu = await MenuItems.update(req.params.id, req.body);
+
+    res.send(updatedMenu);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+module.exports = { getAll, getOne, create, update };
