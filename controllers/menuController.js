@@ -27,7 +27,6 @@ const create = async (req, res) => {
   }
 };
 
-// eslint-disable-next-line consistent-return
 const update = async (req, res) => {
   try {
     const updatedMenu = await MenuItems.update(req.params.id, req.body);
@@ -38,4 +37,14 @@ const update = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getOne, create, update };
+const deleteMenu = async (req, res) => {
+  try {
+    const deletedMenu = await MenuItems.deleteMenu(req.params.id);
+
+    res.send(deletedMenu);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+module.exports = { getAll, getOne, create, update, deleteMenu };

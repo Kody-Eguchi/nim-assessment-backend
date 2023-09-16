@@ -65,4 +65,18 @@ const update = async (id, body) => {
   }
 };
 
-module.exports = { getAll, getOne, create, update, MenuItems };
+const deleteMenu = async (id) => {
+  try {
+    const deletedMenu = await MenuItems.findByIdAndRemove(id);
+
+    if (!deletedMenu) {
+      throw new Error("Menu item not found");
+    }
+
+    return deletedMenu;
+  } catch (error) {
+    return error;
+  }
+};
+
+module.exports = { getAll, getOne, create, update, deleteMenu, MenuItems };
