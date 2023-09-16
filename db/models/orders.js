@@ -95,6 +95,19 @@ const getTotalSales = async () => {
   return { total: totalSales };
 };
 
+const getAllOrdersByStatus = async (status) => {
+  try {
+    const filter = {
+      $or: [{ status: { $regex: status, $options: "i" } }]
+    };
+
+    const filteredOrders = await Order.find(filter);
+    return filteredOrders;
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   getAll,
   getOne,
@@ -103,5 +116,6 @@ module.exports = {
   remove,
   getByStatus,
   getTotalSales,
+  getAllOrdersByStatus,
   Order
 };
