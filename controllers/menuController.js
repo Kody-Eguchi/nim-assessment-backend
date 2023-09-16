@@ -41,7 +41,7 @@ const deleteMenu = async (req, res) => {
   try {
     const deletedMenu = await MenuItems.deleteMenu(req.params.id);
 
-    res.send(deletedMenu);
+    res.send(deletedMenu.id);
   } catch (error) {
     res.status(500).send(error);
   }
