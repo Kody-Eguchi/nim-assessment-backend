@@ -79,4 +79,27 @@ const deleteMenu = async (id) => {
   }
 };
 
-module.exports = { getAll, getOne, create, update, deleteMenu, MenuItems };
+const searchMenu = async (query) => {
+  try {
+    const filter = {
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } }
+      ]
+    };
+    const menuItems = await MenuItems.find(filter);
+    return menuItems;
+  } catch (error) {
+    return error;
+  }
+};
+
+module.exports = {
+  getAll,
+  getOne,
+  create,
+  update,
+  deleteMenu,
+  searchMenu,
+  MenuItems
+};

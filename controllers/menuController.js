@@ -47,4 +47,15 @@ const deleteMenu = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getOne, create, update, deleteMenu };
+const searchMenu = async (req, res) => {
+  try {
+    const { q } = req.query;
+    const menuItems = await MenuItems.searchMenu(q);
+
+    res.send(menuItems);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+module.exports = { getAll, getOne, create, update, searchMenu, deleteMenu };
